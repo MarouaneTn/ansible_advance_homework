@@ -6,7 +6,10 @@
     scm_type: git
     scm_url: https://github.com/MarouaneTn/ansible_advance_homework.git
     state: present
-  with_items: "{{ QA, production }}"
+    tower_config_file: "~/.tower_cli.cfg"
+  with_items: 
+    - QA
+    - production
 # Use tower module or tower-cli to create Ansible Tower project. Name of the project is specifed in ./vars/main.yml
 
 - name: Machine Credentail to connect to workstation using openstack.pub
