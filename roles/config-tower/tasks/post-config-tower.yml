@@ -6,11 +6,11 @@
 - name: Download Credential file 
   copy:
     src: workstation_creds.json
-    dest: /root/workstation_creds.yml
+    dest: /root/workstation_creds.json
 
 - name: Machine Credentail to connect to workstation using openstack.pub
   command: |
-    tower-cli credential create --name "{{ssh_cred_name}}" --organization "{{org_name}}" --credential-type Machine --inputs=@/root/workstation_creds.yml
+    tower-cli credential create --name "{{ssh_cred_name}}" --organization "{{org_name}}" --credential-type Machine --inputs=@/root/workstation_creds.json
 
 - name: Create Inventory
   command: |
