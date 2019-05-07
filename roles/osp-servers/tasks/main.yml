@@ -1,6 +1,8 @@
 ---
 
 # tasks file for osp.servers
+
+#Create 3tier server instance
 - name: Create new server instances and attaches them a network and passes metadata to the instance
   os_server:
       cloud: ospcloud
@@ -26,6 +28,7 @@
   tags:
   - qa.servers 
 
+# allocate floating IP to servers
 - name: Add floating IP to Servers
   os_floating_ip:
     cloud: ospcloud
@@ -40,9 +43,11 @@
   tags:
   - qa.servers   
 
+# show server external IP
 - name: Show "{{ instanceip }}" public IP
   debug: var=instancefloatingip.floating_ip.floating_ip_address 
 
+# get servers facts
 - name: OpenStack servers
   os_server_facts:
     cloud: ospcloud
@@ -50,6 +55,7 @@
   tags:
   - qa.servers
 
+# Waiting to instance to be up and availbe via ssh
 - name: Wait for server to be available
   wait_for:
     host:  "{{ item.public_v4 }}"
