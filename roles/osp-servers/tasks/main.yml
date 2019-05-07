@@ -12,6 +12,7 @@
       wait: yes
       nics:
       - net-name: int_network
+      meta: "{{ item.1 }}"
       userdata: |
         #!/bin/bash
         curl -o /tmp/openstack.pub http://www.opentlc.com/download/ansible_bootcamp/openstack_keys/openstack.pub
@@ -23,7 +24,7 @@
     - "{{osp_servers}}"
     - meta 
   tags:
-  - test.servers 
+  - qa.servers 
 
 - name: Add floating IP to Servers
   os_floating_ip:
@@ -37,7 +38,7 @@
   register: instancefloatingip
   with_dict: "{{osp_servers}}"
   tags:
-  - test.servers   
+  - qa.servers   
 
 - name: Show "{{ instanceip }}" public IP
   debug: var=instancefloatingip.floating_ip.floating_ip_address 
@@ -47,7 +48,7 @@
     cloud: ospcloud
   register: result
   tags:
-  - test.servers
+  - qa.servers
 
 - name: Wait for server to be available
   wait_for:
@@ -59,4 +60,4 @@
   with_items: 
     - "{{ result.ansible_facts.openstack_servers }}"
   tags:
-  - test.servers
+  - qa.servers
