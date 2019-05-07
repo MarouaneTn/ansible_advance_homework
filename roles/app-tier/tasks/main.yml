@@ -2,12 +2,12 @@
 # tasks file for app-tier
 - name: install {{ payload }}
   package:
-    name: {{ payload }}
+    name: "{{ payload }}"
     state: latest
 
 - name: start & enable {{ payload }} at boot
   service:
-    name: tomcat
+    name: "{{ payload }}"
     enabled: yes
     state: started
 

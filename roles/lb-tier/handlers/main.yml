@@ -2,5 +2,5 @@
 # handlers file for lb-tier
 - name: restart_HAproxy
   service:
-    name: {{ payload }}
+    name: "{{ payload }}"
     state: restarted

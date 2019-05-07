@@ -2,12 +2,12 @@
 # tasks file for lb-tier
 - name: install {{ payload }}
   yum:
-    name: haproxy 
+    name: "{{ payload }}"
     state: latest
 
 - name: enable {{ payload }}
   service:
-    name: haproxy
+    name: "{{ payload }}"
     enabled: yes
     state: started
 
